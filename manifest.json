@@ -1,21 +1,19 @@
 {
-	"name":"Or2 Extention",
-	"description":"Ekstensi chrome pengawas anak",
-	"version":"1.0",
-	"manifest_version":2,
-	"background":[
-		{
-			"scripts":["ortu.js"],
-			"persistent":true
-		}
-	],
-	"browser_action":{
-		"default_icon":"icon.png",
+        "name":"Or2 Extention",
+        "description":"Ekstensi chrome pengawas anak",
+        "version":"1.0",
+        "manifest_version":2,
+        "background":
+                {
+                        "scripts":["background.js"]
+                },
+        "browser_action":{
+                "default_icon":"icon.png",
                 "default_popup":"ortu.html"
-	},
-	"permissions":[
-		"tabs",
-		"webRequest",
-		"*://*/"
-	]
+        },
+        "permissions":[
+                "tabs",
+                "webRequest",
+                "*://*/"
+        ]
 }
