@@ -1,24 +1,30 @@
-chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
-	let url = tabs[0].url;
-	var domain = get_domain(url);
-	console.log(domain);
-	if(domain.match('youtube.com')){
-		redirect_to('https://google.com');
-	}
-	
-});
-function get_domain(url){
+(function(){
+	        console.log('domain : '+get_domain());
+})();
+
+function get_domain(){
 	var the_url = '';
-	if(url.match('https://')){
-		the_url = url.replace('https://','');
-	}else if(url.match('http://')){
-		the_url = url.replace('http://','');
+	chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
+		the_url = tabs[0].url;
+	});
+	if(the_url.match('https://')){
+		the_url = the_url.replace('https://','');
+	}else if(the_url.match('http://')){
+		the_url = the_url.replace('http://','');
 	}else{
 		console.log('Protokol tidak terdaftar');
 	}
 	var domain = the_url.split('/')[0];
+
 	return domain;
 }
-function redirect_to(url){
-	console.log('redirect to '+url);
+
+function first_block(){
+	var callback = function(details){
+		return {redirectUrl: "https://google.com"};
+	};
+	var filter = {urls:["*://*.co.id/*"]};
+	var extra_opt = ["blocking"];
+	chrome.webRequest.onBeforeRequest.addListener(
+	callback, filter, extra_opt);
 }
