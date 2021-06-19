@@ -23,7 +23,7 @@ function first_block(){
 	var callback = function(details){
 		return {redirectUrl: "https://google.com"};
 	};
-	var filter = {urls:["*://*.co.id/*"]};
+	var filter = {urls:["*://youtube.com/*"]};
 	var extra_opt = ["blocking"];
 	chrome.webRequest.onBeforeRequest.addListener(
 	callback, filter, extra_opt);
