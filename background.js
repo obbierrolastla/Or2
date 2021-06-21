@@ -7,18 +7,16 @@ function get_domain(){
 	chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
 		the_url = tabs[0].url;
 	});
-	if(the_url.match('https://')){
-		the_url = the_url.replace('https://','');
-	}else if(the_url.match('http://')){
-		the_url = the_url.replace('http://','');
-	}else{
-		console.log('Protokol tidak terdaftar');
-	}
-	var domain = the_url.split('/')[0];
+	var domain = the_url.split('://')[1].split('/')[0];
 
 	return domain;
 }
-
+function redirect_to(desire_url){
+        chrome.tabs.query({active:true,windowType:"normal", currentWindow: true},function(tabs){
+                chrome.tabs.update(tabs[0].id,{url:desire_url});
+                console.log('redirect to'+desire_url);
+        });
+}
 function first_block(){
 	var callback = function(details){
 		return {redirectUrl: "https://google.com"};
