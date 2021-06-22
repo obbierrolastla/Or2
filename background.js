@@ -1,5 +1,5 @@
 (function(){
-	        console.log('domain : '+get_domain());
+	        first_block();
 })();
 
 function get_domain(){
